@@ -1,0 +1,17 @@
+$kind: http-request
+name: 4. Update Article (PUT)
+description: Mengubah data article lengkap berdasarkan ID tertentu (Mendukung PUT/POST/PATCH).
+url: http://localhost:{{port}}/article/1
+method: PUT
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+        "title": "Perubahan Judul Artikel Golang Yang Baru Saja Diupdate",
+        "content": "Konten ini diubah melalui metode PUT HTTP dengan isi teks yang sengaja dibuat panjang sekali melebihi ketentuan minimal dua ratus kata atau karakter guna menghindari bad request error pada layer handler Go.",
+        "category": "Golang Advanced",
+        "status": "draft"
+    }
+order: 5000

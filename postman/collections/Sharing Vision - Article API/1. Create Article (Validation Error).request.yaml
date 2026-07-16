@@ -1,0 +1,17 @@
+$kind: http-request
+name: 1. Create Article (Validation Error)
+description: Skenario error ketika input data tidak memenuhi kriteria validasi yang diminta pada soal.
+url: http://localhost:{{port}}/article/
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+        "title": "Judul Pendek",
+        "content": "Konten terlalu pendek.",
+        "category": "Go",
+        "status": "invalid_status"
+    }
+order: 2000

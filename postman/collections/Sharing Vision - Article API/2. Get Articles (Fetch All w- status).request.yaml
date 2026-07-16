@@ -1,0 +1,18 @@
+$kind: http-request
+name: 2. Get Articles (Fetch All w/ status)
+description: Endpoint untuk menarik daftar artikel menggunakan filter query string (Improvement yang disarankan dibanding path parameter).
+url: http://localhost:{{port}}/article?limit=10&page=0&status=draft
+method: GET
+queryParams:
+  - key: limit
+    value: "10"
+    disabled: false
+    description: Jumlah maksimal data yang ditarik
+  - key: page
+    value: "0"
+    disabled: false
+    description: Index awal pengambilan data
+  - key: status
+    value: draft
+    disabled: false
+order: 3000

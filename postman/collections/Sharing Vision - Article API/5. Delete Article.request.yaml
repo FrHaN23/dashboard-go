@@ -1,0 +1,6 @@
+$kind: http-request
+name: 5. Delete Article
+description: Menghapus data article secara permanen atau memindahkannya berdasarkan ID yang di-request.
+url: http://localhost:{{port}}/article/2
+method: DELETE
+order: 6000

@@ -1,0 +1,225 @@
+{
+  "info": {
+    "name": "Sharing Vision - Article API",
+    "description": "Postman Collection untuk pengujian REST API Article pada Test Backend Sharing Vision.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. Create Article (Success)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"title\": \"Belajar Dasar Pemrograman Golang REST API Bawaan\",\n    \"content\": \"Ini adalah konten artikel tutorial Golang REST API yang dibuat sangat panjang agar dapat memenuhi syarat validasi minimal dua ratus karakter pada tugas backend sharing vision kali ini tanpa menggunakan framework tambahan apapun.\",\n    \"category\": \"Golang\",\n    \"status\": \"draft\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:{{port}}/article/",
+          "protocol": "http",
+          "host": ["localhost"],
+          "path": ["article", ""],
+          "variable": [
+            {
+              "key": "port",
+              "value": "{{port}}"
+            }
+          ]
+        },
+        "description": "Endpoint untuk membuat artikel baru dengan data valid (Title >= 20 char, Content >= 200 char, Status 'publish')."
+      },
+      "response": []
+    },
+    {
+      "name": "1. Create Article (Validation Error)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"title\": \"Judul Pendek\",\n    \"content\": \"Konten terlalu pendek.\",\n    \"category\": \"Go\",\n    \"status\": \"invalid_status\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:{{port}}/article/",
+          "protocol": "http",
+          "host": ["localhost"],
+          "path": ["article", ""],
+          "variable": [
+            {
+              "key": "port",
+              "value": "{{port}}"
+            }
+          ]
+        },
+        "description": "Skenario error ketika input data tidak memenuhi kriteria validasi yang diminta pada soal."
+      },
+      "response": []
+    },
+    {
+      "name": "2. Get Articles (Fetch All)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:{{port}}/article?limit=10&page=1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "path": ["article"],
+          "query": [
+            {
+              "key": "limit",
+              "value": "10",
+              "description": "Jumlah maksimal data yang ditarik"
+            },
+            {
+              "key": "page",
+              "value": "1"
+            }
+          ],
+          "variable": [
+            {
+              "key": "port",
+              "value": "{{port}}"
+            }
+          ]
+        },
+        "description": "Endpoint untuk menarik daftar artikel menggunakan filter query string (Improvement yang disarankan dibanding path parameter)."
+      },
+      "response": []
+    },
+    {
+      "name": "2. Get Articles (Fetch All w/ status)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:{{port}}/article?limit=10&page=0&status=draft",
+          "protocol": "http",
+          "host": ["localhost"],
+          "path": ["article"],
+          "query": [
+            {
+              "key": "limit",
+              "value": "10",
+              "description": "Jumlah maksimal data yang ditarik"
+            },
+            {
+              "key": "page",
+              "value": "0",
+              "description": "Index awal pengambilan data"
+            },
+            {
+              "key": "status",
+              "value": "draft"
+            }
+          ],
+          "variable": [
+            {
+              "key": "port",
+              "value": "{{port}}"
+            }
+          ]
+        },
+        "description": "Endpoint untuk menarik daftar artikel menggunakan filter query string (Improvement yang disarankan dibanding path parameter)."
+      },
+      "response": []
+    },
+    {
+      "name": "3. Get Article By ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:{{port}}/article/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "path": ["article", "1"],
+          "variable": [
+            {
+              "key": "port",
+              "value": "{{port}}"
+            }
+          ]
+        },
+        "description": "Menampilkan detail data article spesifik berdasarkan ID tertentu."
+      },
+      "response": []
+    },
+    {
+      "name": "4. Update Article (PUT)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"title\": \"Perubahan Judul Artikel Golang Yang Baru Saja Diupdate\",\n    \"content\": \"Konten ini diubah melalui metode PUT HTTP dengan isi teks yang sengaja dibuat panjang sekali melebihi ketentuan minimal dua ratus kata atau karakter guna menghindari bad request error pada layer handler Go.\",\n    \"category\": \"Golang Advanced\",\n    \"status\": \"draft\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:{{port}}/article/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "path": ["article", "1"],
+          "variable": [
+            {
+              "key": "port",
+              "value": "{{port}}"
+            }
+          ]
+        },
+        "description": "Mengubah data article lengkap berdasarkan ID tertentu (Mendukung PUT/POST/PATCH)."
+      },
+      "response": []
+    },
+    {
+      "name": "5. Delete Article",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:{{port}}/article/2",
+          "protocol": "http",
+          "host": ["localhost"],
+          "path": ["article", "2"],
+          "variable": [
+            {
+              "key": "port",
+              "value": "{{port}}"
+            }
+          ]
+        },
+        "description": "Menghapus data article secara permanen atau memindahkannya berdasarkan ID yang di-request."
+      },
+      "response": []
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+$kind: http-request
+name: 1. Create Article (Success)
+description: Endpoint untuk membuat artikel baru dengan data valid (Title >= 20 char, Content >= 200 char, Status 'publish').
+url: http://localhost:{{port}}/article/
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+        "title": "Belajar Dasar Pemrograman Golang REST API Bawaan",
+        "content": "Ini adalah konten artikel tutorial Golang REST API yang dibuat sangat panjang agar dapat memenuhi syarat validasi minimal dua ratus karakter pada tugas backend sharing vision kali ini tanpa menggunakan framework tambahan apapun.",
+        "category": "Golang",
+        "status": "draft"
+    }
+order: 1000
