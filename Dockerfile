@@ -6,11 +6,10 @@ RUN apk add --no-cache build-base musl-dev
 WORKDIR /app
 
 
-COPY backend/go.mod backend/go.sum ./
+COPY go.mod go.sum ./
 RUN go mod download
 
-COPY backend/ .
-COPY openapi.yaml /app/openapi.yaml
+COPY . .
 
 RUN CGO_ENABLED=1 GOOS=linux go build \
     -ldflags='-w -s -extldflags "-static"' \
@@ -24,7 +23,6 @@ RUN apk add --no-cache ca-certificates tzdata
 WORKDIR /app
 
 COPY --from=builder /app/backend-bin ./backend
-COPY --from=builder /app/openapi.yaml ./openapi.yaml
 
 RUN chmod +x ./backend
 
